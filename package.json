@@ -1,0 +1,25 @@
+{
+  "name": "html5view",
+  "version": "1.0.0",
+  "description": "restful server",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarPeMann/html5view.git"
+  },
+  "author": "MPMa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarPeMann/html5view/issues"
+  },
+  "homepage": "https://github.com/MarPeMann/html5view#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
