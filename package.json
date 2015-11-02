@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MarPeMann/html5view#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "mongoose": "^4.2.3"
   }
 }
