@@ -1,5 +1,8 @@
 console.log("Toimii...");
 
+// Shown to every function
+//var g_person_data;
+
 $(document).ready(function(){
     console.log("jquery onload trigger");
     $("nav").css("background-color","lightblue")
@@ -45,9 +48,20 @@ $(document).ready(function(){
     // attribute type with value button.
     // then add event handler for click event of them.
     
-    $("[type=button]").click(function(data){
-            console.log(data);
-    });
+    $("[type=button]").click(function(click_data){
+            //console.log(click_data);
+            for(i = 0; i < data.length; i++){
+                
+                if(click_data.currentTarget.id == data[i]._id){
+                    
+                    buildModifyUI(data[i]);
+                    break;
+                
+                }
+
+            }
+
+        });
         
     });
     
@@ -55,6 +69,12 @@ $(document).ready(function(){
 
 
 });
+
+function buildModifyUI(person_data){
+    var html = "<input type='text' value='" + person_data.name + "'/>";
+    
+    $("body").html(html);
+}
 
 
 
