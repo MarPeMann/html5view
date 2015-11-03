@@ -10,6 +10,8 @@ router.get('/', function(req,res){
 });
 
 router.post('/', function(req,res){
+    
+    db.saveNewPerson(req,res);
 
 });
 

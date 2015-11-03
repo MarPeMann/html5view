@@ -35,12 +35,23 @@ $(document).ready(function(){
                         "<td>" + data[i].name + "</td>" +
                         "<td>" + data[i].address + "</td>" +
                         "<td>" + data[i].age + "</td>" +
-                        "<td>" + data[i].email + "</td>" +
+                        "<td><input type='button' id=" + data[i]._id + " value='modify'/></td>" +
                         "</tr>";
             
             $(html).appendTo("tbody");
         }
+        
+            // Get all elements from DOM where element has 
+    // attribute type with value button.
+    // then add event handler for click event of them.
+    
+    $("[type=button]").click(function(data){
+            console.log(data);
     });
+        
+    });
+    
+
 
 
 });
