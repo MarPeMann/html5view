@@ -16,10 +16,14 @@ router.post('/', function(req,res){
 });
 
 router.put('/', function(req,res){
+    db.updatePerson(req,res);
 
 });
 
-router.delete('/', function(req,res){
+router.delete('/:id', function(req,res){
+    //console.log(req.params.id);
+    //res.send("ok");
+    db.deletePerson(req, res);
 
 });
 
