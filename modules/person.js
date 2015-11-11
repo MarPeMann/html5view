@@ -27,5 +27,9 @@ router.delete('/:id', function(req,res){
 
 });
 
+router.get('/:nimi', function(req,res){
+    console.log("ollaan routerissa");
+    db.findPerson(req, res);
+});
 
 module.exports = router;

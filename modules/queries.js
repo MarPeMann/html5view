@@ -20,7 +20,7 @@ exports.saveNewPerson = function(req, res){
     var personTemp = new db.Person(req.body);
     //save to db
     personTemp.save(function(err,ok){
-        res.send("done");
+        res.redirect("/");
     });
 
 
@@ -59,5 +59,42 @@ exports.updatePerson = function(req, res){
         res.send("updated");
     
     });
+
+}
+
+// KAtotaampa ny sitten...
+exports.findPerson = function(req, res){
+    
+    var name = req.params.nimi.split("=")[1];
+    console.log("name: " + name);
+    
+    db.Person.find({name:{$regex : "^" + name,'$options':'i'}}, function(err,data){
+        if(err){
+            console.log(err.message);
+            res.send("erroria pukkaa");
+        
+        }else{
+            console.log(data);
+            res.send(data);
+        }
+        
+    
+    
+    
+    });
+
+/*    db.Person.find(function(err, searchData){
+        if(err){
+            console.log(err.message);
+            res.send("erroria pukkaa");
+        
+        }else{
+            console.log(data);
+            //res.send(data);
+        }
+    
+    
+    });*/
+
 
 }

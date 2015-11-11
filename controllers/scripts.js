@@ -5,6 +5,34 @@ console.log("Toimii...");
 
 $(document).ready(function(){
     console.log("jquery onload trigger");
+    
+    $("#search").click(function(){
+    var text = $("#search_text").val();
+    
+    console.log("search clicked");
+    $.ajax({
+        method:"GET",
+        url:"http://localhost:3000/persons/nimi=" + text
+    
+    }).done(function(data){
+        //console.log(data);
+        $("tbody").children().remove();
+        for(i = 0; i < data.length; i++){
+            
+            var html = "<tr>" +
+                        "<td>" + data[i].name + "</td>" +
+                        "<td>" + data[i].address + "</td>" +
+                        "<td>" + data[i].age + "</td>" +
+                        "<td><input type='button' id=" + data[i]._id + " value='modify'/></td>" +
+                        "</tr>";
+            
+            $(html).appendTo("tbody");
+        }
+        
+    });
+    
+});
+    
     $("nav").css("background-color","lightblue")
     .css("padding","20px").css("border-radius","8px");
     
@@ -114,15 +142,8 @@ function buildModifyUI(person_data){
     
     });
 }
+ 
 
 
-
-/*window.onload = function(event){
-
-console.log(event);
-    
-jokuid.innerHTML = "niin on";
-jokuid.style.backgroundColor = "black";
-}*/
 
 
