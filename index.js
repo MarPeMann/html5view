@@ -5,6 +5,7 @@ var database = require('./modules/database');
 var queries = require('./modules/queries');
 var person = require('./modules/person');
 var app = express();
+var user = require('./modules/user');
 
 // ====== Middlewares =======
 //bodyparser middleware parses json object from http post request
@@ -25,6 +26,7 @@ app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 app.use('/lib', express.static(path.join(__dirname, 'lib')));
 
 app.use('/persons', person);
+app.use('/friends', user);
 
 // ====== Routers ===========
 /*
@@ -33,6 +35,7 @@ app.get('/', function(req, res){
     res.sendfile("views/index.html");
 });
 */
+
 
 app.get('/persons', function(req, res){
     //res.send("hello persons there");

@@ -24,6 +24,7 @@ var Person = mongoose.model('Person', {
 
 //nyt näkyy modulin ulkopuolelle
 exports.Person = Person;
+exports.Friends = User;
 
 /*exports.myFunction(){
 

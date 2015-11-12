@@ -83,18 +83,43 @@ exports.findPerson = function(req, res){
     
     });
 
-/*    db.Person.find(function(err, searchData){
+}
+
+exports.registerFriend = function(req,res){
+    
+    var friend =  new db.Friends(req.body);
+    friend.save(function(err){
         if(err){
-            console.log(err.message);
-            res.send("erroria pukkaa");
-        
+            res.send({status:err.message});
         }else{
-            console.log(data);
-            //res.send(data);
+            res.send({status:"ok"});
         }
+        
+    });
+
+
+
+}
+
+exports.loginFriend = function(req,res){
     
+    var searchObject = {username:req.body.username, password:req.body.password}
     
-    });*/
+    db.Friends.find(searchObject, function(err,data){
+        
+        if(err){
+            res.send({status:err.message});
+        }else{
+            if(data.length>0){
+                res.send({status:"OK"});
+            }else{
+                res.send({status:"Wrong username or password"});
+            }
+            
+        }
+        
+    });
+
 
 
 }

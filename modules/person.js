@@ -3,6 +3,10 @@ var db = require('./queries');
 
 var router = express.Router();
 
+router.get('/username',function(req,res){
+    
+});
+
 router.get('/', function(req,res){
     
     db.getAllPersons(req,res);
@@ -31,5 +35,7 @@ router.get('/:nimi', function(req,res){
     console.log("ollaan routerissa");
     db.findPerson(req, res);
 });
+
+
 
 module.exports = router;
