@@ -20,7 +20,13 @@ exports.saveNewPerson = function(req, res){
     var personTemp = new db.Person(req.body);
     //save to db
     personTemp.save(function(err,ok){
-        res.redirect("/");
+        db.Friends.update({username:req.body.user},
+                          {$push:{'friends':personTemp._id}},
+                            function(err, mode){
+        //res.redirect(301,"/persons.html");
+            res.send("Done");
+    });
+        
     });
 
 
@@ -36,12 +42,16 @@ exports.deletePerson = function(req, res){
     //and [i] contains "xxxxxxxxxxx"
     
     var id = req.params.id.split("=")[1];
-    console.log(id);
+    var userName = req.params.username.split("=")[1];
+    //console.log(id);
     db.Person.remove({_id:id}, function(err){
         if(err){
             res.send(err.message);
         }else{
-            res.send("delete ok");
+            db.Friends.update({username:userName},{$pull:{'friends':id}}, function(err,data){
+                res.send("delete ok");
+            });
+            
         }
     });
 }
@@ -66,21 +76,26 @@ exports.updatePerson = function(req, res){
 exports.findPerson = function(req, res){
     
     var name = req.params.nimi.split("=")[1];
+    var username = req.params.username.split("=")[1];
     console.log("name: " + name);
     
-    db.Person.find({name:{$regex : "^" + name,'$options':'i'}}, function(err,data){
-        if(err){
+    db.Friends.find({username:username}).populate({path:'friends',match:{name:{$regex : "^" + name,'$options':'i'}}}).exec(function(err,data){
+        
+        console.log(err);
+        console.log(data);
+        res.send(data[0].friends);
+        /*if(err){
             console.log(err.message);
             res.send("erroria pukkaa");
         
-        }else{
+        }else{     
             console.log(data);
-            res.send(data);
+            res.send(data[0].friends); 
         }
         
     
     
-    
+    */
     });
 
 }
@@ -122,4 +137,18 @@ exports.loginFriend = function(req,res){
 
 
 
+}
+
+
+exports.getFriendsByUsername = function(req,res){
+    
+    var usern = req.params.username.split("=")[1];
+    db.Friends.find({username:usern}).
+        populate('friends').exec(function(err,data){
+            
+            console.log(err);
+            console.log(data[0]);
+            res.send(data[0].friends);
+        
+        });
 }

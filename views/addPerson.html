@@ -1,20 +1,44 @@
 <!doctype html>
 <html>
 <head>
+    <script src="../lib/jquery-2.1.4.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            $("#sendBtn").click(function(){
+                var data = {
+                    user:localStorage['username'],
+                    name:$("#name").val(),
+                    address:$("#address").val(),
+                    age:$("#age").val()
+                }
+                $.ajax({
+                    method:'POST',
+                    url:'http://localhost:3000/persons',
+                    data:data
+                    //dataType:'json'
+                }).done(function(){
+                    window.location = "./persons.html"
+                
+                });
+            });
+        
+        });
+    </script>
     <title></title>
 
 </head>
 
 <body>
-    <form method="post" enctype="application/json" action="/persons">
+    <form>
         
-        <input type="text" placeholder="Your full name" name="name" />
+        <input type="text" placeholder="Your full name" id="name" required/>
         
-        <input type="text" placeholder="Your full address" name="address"/>
+        <input type="text" placeholder="Your full address" id="address" required/>
         
-        <input type="text" placeholder="Your age" name="age"/>
+        <input type="text" placeholder="Your age" id="age" required/>
         
-        <input type="submit" value="Send"/>
+        <input type="button" id="sendBtn" value="Send"/>
     </form>
     
     

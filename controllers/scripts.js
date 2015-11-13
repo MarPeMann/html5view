@@ -10,13 +10,17 @@ $(document).ready(function(){
     var text = $("#search_text").val();
     
     console.log("search clicked");
+        
     $.ajax({
         method:"GET",
         url:"http://localhost:3000/persons/nimi=" + text
     
     }).done(function(data){
         //console.log(data);
+        //while(data.status ==="ok"){
         $("tbody").children().remove();
+        $("thead").children().remove();
+        //if(data.length > 0){}
         for(i = 0; i < data.length; i++){
             
             var html = "<tr>" +
@@ -28,8 +32,10 @@ $(document).ready(function(){
             
             $(html).appendTo("tbody");
         }
-        
+   // }
+     
     });
+    
     
 });
     
@@ -42,13 +48,13 @@ $(document).ready(function(){
     
     var setting = {
         method:"GET",
-        url:"http://localhost:3000/persons/",
+        url:"http://localhost:3000/friends/username=" + localStorage['username'],
         dataType:"json"
     }
     
     $.ajax(setting).done(function(data){
         //console.log(data);
-        console.log(Object.keys(data[0]));
+        //console.log(Object.keys(data[3]));
         //headerit dynaamisesti taulukkoon
         if(data.length > 0){
             var headers = Object.keys(data[0]);

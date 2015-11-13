@@ -3,9 +3,9 @@ var db = require('./queries');
 
 var router = express.Router();
 
-router.get('/username',function(req,res){
+/*router.get('/username',function(req,res){
     
-});
+});*/
 
 router.get('/', function(req,res){
     
@@ -24,14 +24,14 @@ router.put('/', function(req,res){
 
 });
 
-router.delete('/:id', function(req,res){
+router.delete('/:id/:username', function(req,res){
     //console.log(req.params.id);
     //res.send("ok");
     db.deletePerson(req, res);
 
 });
 
-router.get('/:nimi', function(req,res){
+router.get('/:nimi/:username', function(req,res){
     console.log("ollaan routerissa");
     db.findPerson(req, res);
 });
